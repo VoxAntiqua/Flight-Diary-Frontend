@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import { DiaryEntry } from './types';
-import { getAllEntries } from './diaryService';
+import { DiaryEntry, NewEntry } from './types';
+import { createEntry, getAllEntries } from './diaryService';
 import DiaryEntries from './DiaryEntries';
 import AddEntry from './AddEntry';
 
@@ -14,14 +14,15 @@ const App = () => {
     });
   }, []);
 
-  const onSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    console.log('form submitted!');
+  const addNewEntry = (entry: NewEntry) => {
+    createEntry(entry).then((newEntry) => {
+      setEntries(entries.concat(newEntry));
+    });
   };
 
   return (
     <>
-      <AddEntry onSubmit={onSubmit} />
+      <AddEntry addNewEntry={addNewEntry} />
       <DiaryEntries entries={entries} />
     </>
   );

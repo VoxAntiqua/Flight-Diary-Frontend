@@ -1,5 +1,3 @@
-import { FormEventHandler } from 'react';
-
 export enum Weather {
   Sunny = 'sunny',
   Rainy = 'rainy',
@@ -23,10 +21,12 @@ export interface DiaryEntry {
   comment: string;
 }
 
+export type NewEntry = Omit<DiaryEntry, 'id'>;
+
 export interface DiaryEntriesProps {
   entries: DiaryEntry[];
 }
 
 export interface AddEntryProps {
-  onSubmit: FormEventHandler;
+  addNewEntry: (entry: NewEntry) => void;
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AddEntryProps } from './types';
+import { AddEntryProps, NewEntry } from './types';
 
 const AddEntry = (props: AddEntryProps) => {
   const [date, setDate] = useState('');
@@ -7,10 +7,25 @@ const AddEntry = (props: AddEntryProps) => {
   const [weather, setWeather] = useState('');
   const [comment, setComment] = useState('');
 
+  const onSubmit = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    const newEntry: NewEntry = {
+      date,
+      visibility,
+      weather,
+      comment,
+    };
+    props.addNewEntry(newEntry);
+    setDate('');
+    setVisibility('');
+    setWeather('');
+    setComment('');
+  };
+
   return (
     <div>
       <h2>Add new entry</h2>
-      <form onSubmit={props.onSubmit}>
+      <form onSubmit={onSubmit}>
         <div>
           date:{' '}
           <input
