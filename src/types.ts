@@ -20,3 +20,7 @@ export interface DiaryEntry {
   visibility: Visibility;
   comment: string;
 }
+
+export interface DiaryEntriesProps {
+  entries: DiaryEntry[];
+}
