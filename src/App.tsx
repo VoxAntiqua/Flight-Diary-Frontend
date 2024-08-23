@@ -14,10 +14,13 @@ const App = () => {
     });
   }, []);
 
-  const addNewEntry = (entry: NewEntry) => {
-    createEntry(entry).then((newEntry) => {
-      setEntries(entries.concat(newEntry));
-    });
+  const addNewEntry = async (entry: NewEntry) => {
+    try {
+      const returnedEntry = await createEntry(entry);
+      setEntries(entries.concat(returnedEntry));
+    } catch (error) {
+      console.error('Failed to add new entry:', error);
+    }
   };
 
   return (
