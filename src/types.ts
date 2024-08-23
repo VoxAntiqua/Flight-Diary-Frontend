@@ -1,3 +1,5 @@
+import { FormEventHandler } from 'react';
+
 export enum Weather {
   Sunny = 'sunny',
   Rainy = 'rainy',
@@ -23,4 +25,8 @@ export interface DiaryEntry {
 
 export interface DiaryEntriesProps {
   entries: DiaryEntry[];
+}
+
+export interface AddEntryProps {
+  onSubmit: FormEventHandler;
 }
