@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AddEntryProps, NewEntry } from './types';
+import { AddEntryProps, NewEntry, Visibility, Weather } from './types';
 
 const AddEntry = (props: AddEntryProps) => {
   const [date, setDate] = useState('');
@@ -11,8 +11,8 @@ const AddEntry = (props: AddEntryProps) => {
     event.preventDefault();
     const newEntry: NewEntry = {
       date,
-      visibility,
-      weather,
+      visibility: visibility as Visibility,
+      weather: weather as Weather,
       comment,
     };
     props.addNewEntry(newEntry);
@@ -29,25 +29,86 @@ const AddEntry = (props: AddEntryProps) => {
         <div>
           date:{' '}
           <input
+            type="date"
             name="date"
             value={date}
             onChange={(event) => setDate(event.target.value)}
           />
         </div>
         <div>
-          visibility:{' '}
+          visibility: great
           <input
+            type="radio"
             name="visibility"
-            value={visibility}
-            onChange={(event) => setVisibility(event.target.value)}
+            value="great"
+            checked={visibility === 'great'}
+            onChange={() => setVisibility('great')}
+          />{' '}
+          good
+          <input
+            type="radio"
+            name="visibility"
+            value="good"
+            checked={visibility === 'good'}
+            onChange={() => setVisibility('good')}
+          />{' '}
+          ok
+          <input
+            type="radio"
+            name="visibility"
+            value="ok"
+            checked={visibility === 'ok'}
+            onChange={() => setVisibility('ok')}
+          />{' '}
+          poor
+          <input
+            type="radio"
+            name="visibility"
+            value="poor"
+            checked={visibility === 'poor'}
+            onChange={() => setVisibility('poor')}
           />
         </div>
         <div>
-          weather:{' '}
+          weather: sunny
           <input
+            type="radio"
             name="weather"
-            value={weather}
-            onChange={(event) => setWeather(event.target.value)}
+            value="sunny"
+            checked={weather === 'sunny'}
+            onChange={() => setWeather('sunny')}
+          />{' '}
+          rainy
+          <input
+            type="radio"
+            name="weather"
+            value="rainy"
+            checked={weather === 'rainy'}
+            onChange={() => setWeather('rainy')}
+          />{' '}
+          cloudy
+          <input
+            type="radio"
+            name="weather"
+            value="cloudy"
+            checked={weather === 'cloudy'}
+            onChange={() => setWeather('cloudy')}
+          />{' '}
+          stormy
+          <input
+            type="radio"
+            name="weather"
+            value="stormy"
+            checked={weather === 'stormy'}
+            onChange={() => setWeather('stormy')}
+          />{' '}
+          windy
+          <input
+            type="radio"
+            name="weather"
+            value="windy"
+            checked={weather === 'windy'}
+            onChange={() => setWeather('windy')}
           />
         </div>
         <div>
