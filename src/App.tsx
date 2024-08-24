@@ -4,9 +4,11 @@ import { DiaryEntry, NewEntry } from './types';
 import { createEntry, getAllEntries } from './diaryService';
 import DiaryEntries from './DiaryEntries';
 import AddEntry from './AddEntry';
+import Notification from './Notification';
 
 const App = () => {
   const [entries, setEntries] = useState<DiaryEntry[]>([]);
+  const [notification, setNotification] = useState<string | null>(null);
 
   useEffect(() => {
     getAllEntries().then((data) => {
@@ -19,13 +21,19 @@ const App = () => {
       const returnedEntry = await createEntry(entry);
       setEntries(entries.concat(returnedEntry));
     } catch (error) {
-      console.error('Failed to add new entry:', error);
+      if (error instanceof Error) {
+        setNotification(error.message);
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
+      }
     }
   };
 
   return (
     <>
       <AddEntry addNewEntry={addNewEntry} />
+      <Notification message={notification} />
       <DiaryEntries entries={entries} />
     </>
   );

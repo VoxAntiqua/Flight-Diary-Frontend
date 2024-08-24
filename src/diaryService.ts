@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { DiaryEntry, NewEntry } from './types';
 
 const baseUrl = 'http://localhost:3000/api/diaries';
@@ -13,8 +13,8 @@ export const createEntry = async (object: NewEntry): Promise<DiaryEntry> => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.status);
-      console.log(error.response);
+      const errorMessage = error.response?.data;
+      throw new Error(`${error.status}: ${errorMessage}`);
     } else {
       console.error(error);
     }

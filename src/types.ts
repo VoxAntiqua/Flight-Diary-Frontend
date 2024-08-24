@@ -30,3 +30,7 @@ export interface DiaryEntriesProps {
 export interface AddEntryProps {
   addNewEntry: (entry: NewEntry) => void;
 }
+
+export interface NotificationProps {
+  message: string | null;
+}
